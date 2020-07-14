@@ -1,6 +1,4 @@
-" Setting some decent VIM settings for programming
-" This source file comes from git-for-windows build-extra repository (git-extra/vimrc)
-
+language en_US
 ru! defaults.vim                " Use Enhanced Vim defaults
 aug vimStartup | au! | aug END  " Revert last positioned jump, as it is defined below
 let g:skip_defaults_vim = 1     " Do not source defaults.vim again (after loading this system vimrc)
@@ -11,7 +9,8 @@ set vb                          " turn on the "visual bell" - which is much quie
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 set showmode                    " show the current mode
 set clipboard=unnamed           " set clipboard to unnamed to access the system clipboard under windows
-set wildmode=list:longest,longest:full   " Better command line completion
+set wildmode=longest,list,full  " Better command line completion
+set wildmenu
 
 " Show EOL type and last modified timestamp, right after the filename
 " Set the statusline
@@ -31,28 +30,6 @@ if &term =~ 'xterm-256color'    " mintty identifies itself as xterm-compatible
   endif
   set termguicolors           " Uncomment to allow truecolors on mintty
 endif
-"------------------------------------------------------------------------------
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-    " Set UTF-8 as the default encoding for commit messages
-    autocmd BufReadPre COMMIT_EDITMSG,MERGE_MSG,git-rebase-todo setlocal fileencodings=utf-8
-
-    " Remember the positions in files with some git-specific exceptions"
-    autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$")
-      \           && &filetype !~# 'commit\|gitrebase'
-      \           && expand("%") !~ "ADD_EDIT.patch"
-      \           && expand("%") !~ "addp-hunk-edit.diff" |
-      \   exe "normal g`\"" |
-      \ endif
-
-      autocmd BufNewFile,BufRead *.patch set filetype=diff
-
-      autocmd Filetype diff
-      \ highlight WhiteSpaceEOL ctermbg=red |
-      \ match WhiteSpaceEOL /\(^+.*\)\@<=\s\+$/
-endif " has("autocmd")
-
 
 
 " Vim Plug Start
@@ -62,24 +39,23 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 " colorscheme
 Plug 'tomasr/molokai'
 Plug 'joshdick/onedark.vim'
-Plug 'overcache/NeoSolarized'
 
 " vim-airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Useful tools
+" Useful Plugins
 " Plug 'valloric/youcompleteme'  " auto-completion
 Plug 'jiangmiao/auto-pairs'    " auto-pairs
 Plug 'ryanoasis/vim-devicons'  " pretty icons
 Plug 'tpope/vim-surround'      " quotes edition
-Plug 'tpope/vim-commentary'    " gcc comment
-Plug 'tpope/vim-repeat'        " plugin repeat
+Plug 'tpope/vim-repeat'        " plugin repeation
+Plug 'tpope/vim-commentary'    " `gcc` to comment a line
 Plug 'Lokaltog/vim-easymotion' " quick jump
 Plug 'terryma/vim-multiple-cursors'  " multi selection
 Plug 'junegunn/vim-easy-align'       " Simple align
-
 Plug 'kien/rainbow_parentheses.vim'  " color pairs
+
 " text object
 " 支持自定义文本对象
 Plug 'kana/vim-textobj-user'
@@ -91,7 +67,7 @@ Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
 
 
-" Language support
+" Language highlight support
 Plug 'godlygeek/tabular'
 " For style highlighting
 Plug 'sheerun/vim-polyglot'
@@ -112,7 +88,6 @@ let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 
 
-
 " 设置当文件被改动时自动载入
 set autoread    
 "从不备份  
@@ -126,7 +101,6 @@ set magic                   " 设置魔术
 set nofoldenable
 " 自动缩进
 set autoindent
-set cindent
 " Tab键的宽度
 set tabstop=4
 " 统一缩进为4
@@ -137,7 +111,6 @@ set expandtab
 " 在行和段开始处使用制表符
 set smarttab
 " 显示行号
-"
 set number
 " 显示相对行号
 set relativenumber
@@ -162,24 +135,17 @@ set viminfo+=!
 set iskeyword+=_,$,@,%,#,-
 " 字符间插入的像素行数目
 set linespace=0
-" 增强模式中的命令行自动完成操作
-set wildmenu
 " 使回格键（backspace）正常处理indent, eol, start等
 set backspace=2
-" 高亮显示匹配的括号
-set showmatch
-" 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime=1
-" 光标移动到buffer的顶部和底部时保持3行距离
-set scrolloff=3
+" 光标移动到buffer的顶部和底部时保持4行距离
+set scrolloff=4
 " 为C程序提供自动缩进
 set smartindent
 
 
-" Keys Settings
-let g:mapleader = ","
+" Key mappings
+let g:mapleader = ","   " set the `leader` key
 
-" Shotcuts
 " Go to home and end using capitalized directions
 noremap H ^
 noremap L $
@@ -250,8 +216,11 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 
 " Kite: 独立语法补全插件
-let g:kite_tab_complete=1 " 让kite启用tab来补全
-
+set completeopt+=menuone   " show the popup menu even when there is only 1 match
+set completeopt+=noinsert  " don't insert any text until user chooses a match
+set completeopt-=longest   " don't insert the longest common text
+set completeopt-=preview   " don't open the document preview tab
+set completeopt+=noselect  " don't select the first 
 
 " EasyMotion: 快速移动插件
 let g:EasyMotion_smartcase = 1
