@@ -183,65 +183,59 @@ let g:mapleader = ","
 " Go to home and end using capitalized directions
 noremap H ^
 noremap L $
-" 分屏窗口移动, Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 
-" Plugins Settings
-" Python-mode
-"
-"开启警告
+" PluginsSettings:
+" PythonMode: Python语法检查框架
+" 开启警告
 let g:pymode_warnings = 1
-"保存文件时自动删除无用空格
+" 保存文件时自动删除无用空格
 let g:pymode_trim_whitespaces = 1
 let g:pymode_options = 1
-"显示允许的最大长度的列
+" 显示允许的最大长度的列
 let g:pymode_options_colorcolumn = 1
-"设置QuickFix窗口的最大，最小高度
+" 设置QuickFix窗口的最大，最小高度
 let g:pymode_quickfix_minheight = 3
 let g:pymode_quickfix_maxheight = 10
-"使用python3
+" 使用python3
 let g:pymode_python = 'python3'
-"使用PEP8风格的缩进
+" 使用PEP8风格的缩进
 let g:pymode_indent = 1
-"代码折叠
+" 代码折叠
 let g:pymode_folding = 1
-"开启python-mode定义的移动方式
+" 开启python-mode定义的移动方式
 let g:pymode_motion = 1
-"不启用python-mode内置的python文档
+" 不启用python-mode内置的python文档
 let g:pymode_doc = 0
-"自动检测并启用virtualenv
+" 自动检测并启用virtualenv
 let g:pymode_virtualenv = 1
-"使用python-mode运行python代码
+" 使用python-mode运行python代码
 let g:pymode_run = 1
 let g:pymode_run_bind = '<Leader>r'
-"不使用python-mode设置断点
+" 不使用python-mode设置断点
 let g:pymode_breakpoint = 0
-"let g:pymode_breakpoint_bind = '<leader>b'
-"启用python语法检查
+" let g:pymode_breakpoint_bind = '<leader>b'
+" 启用python语法检查
 let g:pymode_lint = 1
-"修改后保存时进行检查
+" 修改后保存时进行检查
 let g:pymode_lint_on_write = 1
-"编辑时进行检查
+" 编辑时进行检查
 let g:pymode_lint_on_fly = 1
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-"发现错误时不自动打开QuickFix窗口
+" 发现错误时不自动打开QuickFix窗口
 let g:pymode_lint_cwindow = 1
-"侧边栏显示python-mode相关的标志
+" 侧边栏显示python-mode相关的标志
 let g:pymode_lint_signs = 1
-"开启python所有的语法高亮
+" 开启python所有的语法高亮
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
-"高亮缩进错误
+" 高亮缩进错误
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-"高亮空格错误
+" 高亮空格错误
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 
-" " YouCompleteMe: 语句补全插件
+" YouCompleteMe: 语句补全插件
 " autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口"
 " let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM基于标签引擎
 " let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释与字符串中的内容也用于补全
@@ -254,6 +248,12 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 " let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项
 
+
+" Kite: 独立语法补全插件
+let g:kite_tab_complete=1 " 让kite启用tab来补全
+
+
+" EasyMotion: 快速移动插件
 let g:EasyMotion_smartcase = 1
 "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 map <Leader><leader>h <Plug>(easymotion-linebackward)
@@ -264,7 +264,7 @@ map <Leader><leader>l <Plug>(easymotion-lineforward)
 map <Leader><leader>. <Plug>(easymotion-repeat)
 
 
-" Easy align
+" EasyAlign: 快速对齐插件
 vmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
@@ -273,7 +273,7 @@ endif
 let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 
 
-" RainbowParentheses
+" RainbowParentheses: 彩色括号插件
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
