@@ -215,13 +215,6 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项
 
 
-" Kite: 独立语法补全插件
-set completeopt+=menuone   " show the popup menu even when there is only 1 match
-set completeopt+=noinsert  " don't insert any text until user chooses a match
-set completeopt-=longest   " don't insert the longest common text
-set completeopt-=preview   " don't open the document preview tab
-set completeopt+=noselect  " don't select the first 
-
 " EasyMotion: 快速移动插件
 let g:EasyMotion_smartcase = 1
 "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
