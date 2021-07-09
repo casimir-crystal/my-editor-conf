@@ -1,0 +1,63 @@
+language en_US
+ru! defaults.vim                " Use Enhanced Vim defaults
+aug vimStartup | au! | aug END  " Revert last positioned jump, as it is defined below
+let g:skip_defaults_vim = 1     " Do not source defaults.vim again (after loading this system vimrc)
+
+set ai                          " set auto-indenting on for programming
+set showmatch                   " automatically show matching brackets. works like it does in bbedit.
+set vb                          " turn on the 'visual bell' - which is much quieter than the 'audio blink'
+set laststatus=2                " make the last line where the status is two lines deep so you can see status always
+set showmode                    " show the current mode
+set clipboard=unnamed           " set clipboard to unnamed to access the system clipboard under windows
+set wildmode=longest,list,full  " Better command line completion
+set wildmenu
+
+" IdeaVim
+set surround  " turn on surround
+set multiple-cursors
+
+" 设置当文件被改动时自动载入
+set autoread
+"从不备份
+set nobackup
+"自动保存
+set autowrite
+set ruler                   " 打开状态栏标尺
+set cursorline              " 突出显示当前行
+set magic                   " 设置魔术
+" 自动缩进
+set autoindent
+" Tab键的宽度
+set tabstop=2
+" 统一缩进为2
+set softtabstop=2
+set shiftwidth=2
+" 用空格代替制表符
+set expandtab
+" 显示行号
+set number
+" 显示相对行号
+set relativenumber
+" 普通模式显示相对行号，插入模式绝对行号
+autocmd! InsertEnter * :set norelativenumber
+autocmd! InsertLeave * :set relativenumber
+
+" 禁止生成临时文件
+set nobackup
+set noswapfile
+" 搜索忽略大小写
+set ignorecase
+
+" 搜索逐字符高亮
+set hlsearch
+set incsearch
+" 行内替换
+set gdefault
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-
+" 使回格键（backspace）正常处理indent, eol, start等
+set backspace=2
+" 光标移动到buffer的顶部和底部时保持4行距离
+set scrolloff=4
+set clipboard+=ideaputset ideajoin
+
